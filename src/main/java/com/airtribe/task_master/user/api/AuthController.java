@@ -1,11 +1,14 @@
 package com.airtribe.task_master.user.api;
 
+import com.airtribe.task_master.common.response.ApiResponse;
+import com.airtribe.task_master.common.response.ApiSuccess;
 import com.airtribe.task_master.user.application.AuthService;
-import com.airtribe.task_master.user.domain.User;
+import com.airtribe.task_master.user.dto.AuthResponseDto;
 import com.airtribe.task_master.user.dto.UserLoginDto;
 import com.airtribe.task_master.user.dto.UserRegistrationDto;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,23 +25,14 @@ public class AuthController {
         this.authService = authService;
     }
 
+    @ApiSuccess(status = HttpStatus.CREATED, message = "User created successfully")
     @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody UserRegistrationDto request) {
-        try {
-            User userInfo = authService.register(request);
-            return ResponseEntity.ok(userInfo);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public AuthResponseDto register(@Valid @RequestBody UserRegistrationDto request) {
+        return authService.register(request);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> register(@Valid @RequestBody UserLoginDto request) {
-        try {
-            User userInfo = authService.login(request);
-            return ResponseEntity.ok(userInfo);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public AuthResponseDto login(@Valid @RequestBody UserLoginDto request) {
+        return authService.login(request);
     }
 }

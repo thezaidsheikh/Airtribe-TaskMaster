@@ -1,4 +1,4 @@
-package com.airtribe.task_master.common.exception;
+package com.airtribe.task_master.common.response;
 
 import lombok.Data;
 
@@ -15,11 +15,7 @@ public class ApiErrorResponse {
     private String path;
     private Map<String, String> validationErrors;
 
-    public ApiErrorResponse(int status,
-                            String error,
-                            String message,
-                            String path,
-                            Map<String, String> validationErrors) {
+    public ApiErrorResponse(int status, String error, String message, String path, Map<String, String> validationErrors) {
         this.timestamp = LocalDateTime.now();
         this.status = status;
         this.error = error;

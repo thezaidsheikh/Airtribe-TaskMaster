@@ -11,6 +11,8 @@ import tools.jackson.databind.annotation.JsonNaming;
 @Table(name = "users", schema = "user_schema")
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class User {
     @Id
