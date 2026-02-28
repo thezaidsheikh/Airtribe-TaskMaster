@@ -3,6 +3,7 @@ package com.airtribe.task_master.config.security;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
+import com.airtribe.task_master.user.application.TokenProvider;
 
 import java.security.Key;
 import java.util.Date;
@@ -11,18 +12,17 @@ import java.util.Date;
 public class JwtUtil {
 
     private final String SECRET = "4234h3423432h43242384234h42343298";
-    private final long EXPIRATION = 86400000; // 1 day
 
     private Key getSigningKey() {
         return Keys.hmacShaKeyFor(SECRET.getBytes());
     }
 
-    public String generateToken(String email, Object user) {
+    public String generateToken(String email, Object user, long expiration) {
         return Jwts.builder()
                    .setSubject(email)
                    .claim("user",user)
                    .setIssuedAt(new Date())
-                   .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
+                   .setExpiration(new Date(System.currentTimeMillis() + expiration))
                    .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                    .compact();
     }

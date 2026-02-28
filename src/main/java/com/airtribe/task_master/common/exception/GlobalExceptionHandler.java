@@ -1,5 +1,6 @@
 package com.airtribe.task_master.common.exception;
 
+import com.airtribe.task_master.common.response.ApiErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.*;
 import org.springframework.web.bind.MethodArgumentNotValidException;
