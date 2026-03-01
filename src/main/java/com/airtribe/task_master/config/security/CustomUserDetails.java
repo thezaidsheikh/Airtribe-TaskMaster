@@ -9,10 +9,12 @@ import java.util.List;
 
 public class CustomUserDetails implements UserDetails {
 
+    private final Long userId;
     private final String email;
     private final String password;
 
-    public CustomUserDetails(String email, String password) {
+    public CustomUserDetails(Long userId, String email, String password) {
+        this.userId = userId;
         this.email = email;
         this.password = password;
     }
@@ -21,6 +23,8 @@ public class CustomUserDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("EMAIL_" + email));
     }
+
+    public Long getUserId() { return userId; }
 
     @Override
     public String getPassword() { return password; }

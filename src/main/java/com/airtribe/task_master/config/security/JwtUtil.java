@@ -3,7 +3,6 @@ package com.airtribe.task_master.config.security;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Component;
-import com.airtribe.task_master.user.application.TokenProvider;
 
 import java.security.Key;
 import java.util.Date;
@@ -31,10 +30,6 @@ public class JwtUtil {
         return getClaims(token).getSubject();
     }
 
-    public String extractRole(String token) {
-        return getClaims(token).get("role", String.class);
-    }
-
     public boolean isTokenValid(String token) {
         try {
             getClaims(token);
@@ -42,6 +37,12 @@ public class JwtUtil {
         } catch (JwtException | IllegalArgumentException e) {
             return false;
         }
+    }
+
+
+    public Object fetchTokenClaim(String token) {
+        Claims claims = getClaims(token);
+        return claims.get("user",Object.class);
     }
 
     private Claims getClaims(String token) {
