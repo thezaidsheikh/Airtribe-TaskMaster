@@ -31,6 +31,7 @@ public class AuthController {
         return authService.register(request);
     }
 
+    @ApiSuccess(status = HttpStatus.OK, message = "")
     @PostMapping("/login")
     public AuthResponseDto login(@Valid @RequestBody UserLoginDto request) {
         return authService.login(request);

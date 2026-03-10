@@ -42,7 +42,7 @@ public class AuthService {
     }
 
     public AuthResponseDto login(UserLoginDto user) throws RuntimeException, UsernameNotFoundException {
-        User userInfo = userRepository.findByEmail(user.getEmail()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        User userInfo = userRepository.<User>findByEmail(user.getEmail()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
         if (!passwordEncoder.matches(user.getPassword(), userInfo.getPassword())) {
             throw new RuntimeException("Email or password is incorrect");
         }

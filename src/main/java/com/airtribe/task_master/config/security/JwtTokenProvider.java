@@ -8,7 +8,7 @@ public class JwtTokenProvider implements TokenProvider {
 
     private final JwtUtil jwtUtil;
 
-    private final long ACCESS_EXPIRATION = 1000 * 60 * 15; // 15 minutes
+    private final long ACCESS_EXPIRATION = 1000 * 60 * 60; // 1 hour
     private final long REFRESH_EXPIRATION = 1000 * 60 * 60 * 24 * 7; // 7 days
 
     public JwtTokenProvider(JwtUtil jwtUtil) {
